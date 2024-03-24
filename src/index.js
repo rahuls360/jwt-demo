@@ -1,13 +1,13 @@
 var jwt = require("jsonwebtoken");
 
-const mySecret = "s3cr3T";
+const mySecret = "s3cr3T"; // store in .env variable ideally
 
 // During signin
 var token = jwt.sign(
-	{ user: "Rahul Makhija", email: "rahul@example.com", userId: 3 },
-	mySecret,
+	{ user: "Rahul Makhija", email: "rahul@example.com", userId: 3 }, // your user details will go here
+	mySecret, // your secret
 	{
-		expiresIn: 5,
+		expiresIn: 5, // expiry duration in seconds
 	}
 );
 
@@ -19,8 +19,7 @@ try {
 	console.log("decoded: ", decoded);
 	time += delay;
 } catch (e) {
-	console.log("Error:JWT:", e?.message);
-	clearInterval(interval);
+	console.log("Error:JWT:", e?.message); // jwt.verify throws an error if token has expired
 }
 
 // testing token expiration interval example
